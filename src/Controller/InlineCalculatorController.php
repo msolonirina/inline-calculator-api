@@ -24,7 +24,18 @@ class InlineCalculatorController extends AbstractFOSRestController
     #[OA\Post(
         path: '/api/process',
         responses: [
-            new OA\Response(response: 200, description: 'Resultat de l\'opération'),
+            new OA\Response(
+                response: 200, 
+                description: 'Resultat de l\'opération',
+                content: new OA\JsonContent(
+                    type: 'object',
+                    properties: [
+                        new OA\Property(property: 'expression', type:'string', example: 'nine plus nine times two'),
+                        new OA\Property(property: 'operation', type:'string', example: '9 + 9 * 2'),
+                        new OA\Property(property: 'result', type:'integer', example: 27)
+                    ]
+                )
+            ),
             new OA\Response(response: 400, description: 'Bad request'),
         ],
         requestBody: new OA\RequestBody(

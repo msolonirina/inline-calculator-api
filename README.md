@@ -61,4 +61,9 @@ Adapter le port si besoin
 
 Ci après la page d'accueil de la documentation swagger
 
-![Display swagger-ui](screenshots/swagger-ui.png)
+![Display swagger](screenshots/swagger.png)
+
+### Pour lancer le test unitaire 
+```
+$ php bin/phpunit
+```

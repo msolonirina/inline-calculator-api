@@ -24,7 +24,7 @@ class InlineCalculatorService
     ];
 
 
-    public function process(array $input): int {
+    public function process(array $input): array {
 
         if (!array_key_exists('expression', $input) || empty($expression = $input['expression'])) {
             throw new BadRequestHttpException('Erreur de traitement : le champ expression doit être rempli');
@@ -65,6 +65,10 @@ class InlineCalculatorService
             throw new BadRequestHttpException(sprintf("Erreur de traitement du calcul %s : Division par 0 détectée.", $dataToEval));
         }
 
-        return eval(sprintf('return %s ;', $dataToEval));
+        return [
+            'expression' => trim($expression),
+            'operation'  => $dataToEval,
+            'result'     => eval(sprintf('return %s ;', $dataToEval))
+        ];
     }
 }
